@@ -1,7 +1,7 @@
 // lib/airtable.ts
 
-const AIRTABLE_PAT = process.env.AIRTABLE_PAT || "patqJYd2EyPgjBPjo.4c6c86017380ad4c08557c284fd606d361cfd53a9f058ab3c4da3a158e056f0a";
-const BASE_ID = process.env.AIRTABLE_BASE_ID || "appoxVqHRsr5Apw1l";
+const AIRTABLE_PAT = process.env.AIRTABLE_PAT;
+const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const USERS_TABLE = "User%20table"; // URL encoded
 const SERVICES_TABLE = "Talent";
 
