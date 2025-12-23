@@ -76,22 +76,37 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="animate-fade-in-up">
             <h1 className="text-6xl md:text-7xl font-extrabold mb-6 font-display leading-tight">
-              Your Campus
+              LinkUp Market —
               <span className="block gradient-text text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
-                Marketplace
+                Covenant University Student Marketplace
               </span>
             </h1>
+        
             <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
-              Discover, buy, and sell student services, products, and skills.
-              <span className="block mt-2 font-semibold">No more group chat chaos!</span>
+              Discover, buy, and sell student services, products, and skills within
+              <span className="font-semibold"> Covenant University</span>.
+              <span className="block mt-2 font-semibold">
+                Built for CU students — no more group chat chaos.
+              </span>
             </p>
+        
+            {/* SEO helper text (hidden from UI, visible to Google & screen readers) */}
+            <p className="sr-only">
+              LinkUp Market is a Covenant University student marketplace where CU students
+              can buy, sell, and discover campus businesses and services.
+            </p>
+        
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/signup"
                 className="btn-primary px-10 py-5 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-110 transition-all duration-300"
               >
-                🚀 Start Selling Today
+                🚀 Start Selling on Campus
               </Link>
+            </div>
+          </div>
+        </div>
+
               <Link
                 href="#marketplace"
                 className="btn-secondary px-8 py-4 text-lg font-semibold rounded-2xl"
