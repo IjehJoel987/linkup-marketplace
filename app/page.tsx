@@ -83,10 +83,8 @@ export default async function HomePage() {
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
               Discover, buy, and sell student services, products, and skills.
-              <span className="block mt-2 font-semibold">No more group chat chaos!</span>
-            </p>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
               LinkUp Market — Covenant University Student Marketplace
+              LinkUp Market is the official student marketplace for Covenant University students.
               <span className="block mt-2 font-semibold">No more group chat chaos!</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -103,10 +101,6 @@ export default async function HomePage() {
               >
                 Browse Services
               </Link>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
-             LinkUp Market is the official student marketplace for Covenant University students.
-              <span className="block mt-2 font-semibold">No more group chat chaos!</span>
-            </p>
             </div>
           </div>
         </div>
