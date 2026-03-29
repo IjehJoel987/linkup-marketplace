@@ -4,7 +4,43 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { ShoppingCart } from 'lucide-react';
 import RatingSystem from '@/components/RatingSystem';
+import Navbar from '../../../components/Navbar';
+import { useCartStore } from '@/lib/cart-store';
+
+// small helper button component for detail page
+function AddToCartButton({ service }: { service: any }) {
+  const { addItem } = useCartStore();
+  const [adding, setAdding] = useState(false);
+
+  const title = service.fields.Title || 'No Title';
+  const price = service.fields.Price || 0;
+  const images = service.fields.Works?.split('\n').filter((url: string) => url.trim()) || [];
+  const image = images[0] || '/placeholder-product.jpg';
+  const vendorName = service.fields.Name || 'Anonymous';
+
+  const handleClick = async () => {
+    setAdding(true);
+    addItem({ id: service.id, title, price, image, vendorName });
+    setAdding(false);
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={adding}
+      className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50"
+    >
+      {adding ? (
+        <span className="loader h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      ) : (
+        <ShoppingCart className="w-5 h-5" />
+      )}
+      {adding ? 'Adding...' : 'Add to Cart'}
+    </button>
+  );
+}
 
 // Fix for Next.js 15 - params is now a Promise
 export default function ServiceDetailPage({ 
@@ -98,28 +134,7 @@ export default function ServiceDetailPage({
         </div>
       )}
 
-      {/* Navbar */}
-      <nav className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <img 
-                src="/linkup_logo.PNG" 
-                alt="LinkUp" 
-                className="h-16 w-auto"
-              />
-            </Link>
-            <div className="flex gap-3">
-              <Link href="/login" className="px-4 py-2 text-purple-600 hover:text-purple-700 font-semibold">
-                Login
-              </Link>
-              <Link href="/signup" className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:shadow-lg">
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -211,6 +226,11 @@ export default function ServiceDetailPage({
                     You save: ₦{savings.toLocaleString()}
                   </div>
                 )}
+
+                {/* Add to cart button */}
+                <AddToCartButton
+                  service={service}
+                />
               </div>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
@@ -239,25 +259,22 @@ export default function ServiceDetailPage({
                 </div>
               </div>
 
-              {/* Contact Buttons */}
-              <div className="space-y-3">
-                {whatsapp && (
-                  <a
-                    href={`https://wa.me/${whatsapp}?text=Hi! I'm interested in your service: ${fields.Title}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-3 bg-green-500 text-white rounded-lg text-center font-semibold hover:bg-green-600 transition"
-                  >
-                    💬 Chat on WhatsApp
-                  </a>
-                )}
-                
+              {/* Contact & Inquiry Section */}
+              <div className="space-y-4">
+                {/* Inquiry Message */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-4">
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    <span className="font-semibold text-purple-600">Need more details?</span> Have questions about size, color, specifications, or customization? Chat with LinkUp directly on Telegram for quick responses and personalized assistance! 🎯
+                  </p>
+                </div>
+
+                {/* Telegram Contact Button */}
                 {telegram && (
                   <a
                     href={`https://t.me/${telegram.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-3 bg-blue-500 text-white rounded-lg text-center font-semibold hover:bg-blue-600 transition"
+                    className="block w-full py-3 bg-blue-500 text-white rounded-lg text-center font-semibold hover:bg-blue-600 transition shadow-md hover:shadow-lg"
                   >
                     💬 Chat on Telegram
                   </a>
@@ -265,14 +282,14 @@ export default function ServiceDetailPage({
               </div>
 
               {/* Safety Tips */}
-              <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              {/* <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <h4 className="font-semibold text-yellow-800 mb-2">🛡️ Safety Tips</h4>
                 <ul className="text-sm text-yellow-700 space-y-1">
                   <li>• Meet in public places</li>
                   <li>• Inspect before paying</li>
                   <li>• Avoid prepayments</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
